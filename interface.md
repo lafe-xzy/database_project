@@ -12,9 +12,9 @@ web界面流程图：
 5. change_name (new_name)      return 1 if success or 0 if fail;
 6. change_password (new_password)      return 1 if success or 0 if fail;
 
-7. *get_campus_id_by_name (campus_name)      return campus_id;
+7. get_campus_id_by_name (campus_name)      return campus_id;
 8. list_cafeteria_name (campus_id)          return list_of_cafeteria_name;
-9. *get_cafeteria_id_by_name (campus_id, cafeteria_name)      return cafeteria_id;
+9. get_cafeteria_id_by_name (campus_id, cafeteria_name)      return cafeteria_id;
 10. list_dish_name (campus_id, cafeteria_id)      return list_of_dish_name;
 11. *get_dish_id_by_name (campus_id, cafeteria_id, server_time_period, dish_name)      return dish_id;
 
