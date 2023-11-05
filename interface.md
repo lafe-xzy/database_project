@@ -1,7 +1,7 @@
 # 接口文档
 
 web界面流程图：
-![image](https://github.com/lafe-xzy/database_project/assets/134926682/177bae11-9a87-4fea-aa15-c42a5e1d02a9)
+![image](https://github.com/lafe-xzy/database_project/assets/134926682/37836731-42c6-456b-bd8d-7d46a20489ac)
 
 > 应该有的功能
 
