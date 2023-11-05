@@ -1,9 +1,28 @@
 # 接口文档
 
+web界面流程图：
+![image](https://github.com/lafe-xzy/database_project/assets/134926682/177bae11-9a87-4fea-aa15-c42a5e1d02a9)
+
 > 应该有的功能
 
-1. 普通用户注册  （考虑用户可以设置自己的头像？）
-3. 普通用户发表、删除自己的评论
-4. 普通用户和游客（不注册的用户）基于  用户id或名字、菜品id或名字、食堂id或名字、供应时间段    搜索、查看评论
+1. sign_up (user_name, password)      return user_id if success or 0 if fail;
+2. log_in (user_id, password)        return 1 if success or 0 if fail;
+3. log_out ()      return 1 if success of 0 if fail;
+4. destroy (user_id)      return 1 if success or 0 if fail;
+5. change_name (new_name)      return 1 if success or 0 if fail;
+6. change_password (new_password)      return 1 if success or 0 if fail;
 
-5. **关键字与评论中的模糊匹配。（如搜索“蟑螂”给出评论“菜里有蟑螂”等）
+7. *get_campus_id_by_name (campus_name)      return campus_id;
+8. list_cafeteria_name (campus_id)          return list_of_cafeteria_name;
+9. *get_cafeteria_id_by_name (campus_id, cafeteria_name)      return cafeteria_id;
+10. list_dish_name (campus_id, cafeteria_id)      return list_of_dish_name;
+11. *get_dish_id_by_name (campus_id, cafeteria_id, server_time_period, dish_name)      return dish_id;
+
+12. get_comment_by_campus (campus_id)
+13. get_comment_by_cafeteria (campus_id, cafeteria_id)
+14. get_comment_by_time (campus_id, cafeteria_id, time_period)
+15. get_comment_by_dish (campus_id, cafeteria_id, time_period, dish_id)
+16. get_comment_by_userID (user_id)
+
+17. comment (user_id, campus_id, cafeteria_id, server_time_period, dish_id, text)      return comment_id if success or 0 if fail;
+18. del_comment (user_id, campus_id, cafeteria_id, server_time_period, dish_id)      return 1 if success or 0 if fail;
