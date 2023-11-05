@@ -16,7 +16,7 @@ web界面流程图：
 8. list_cafeteria_name (campus_id)          return list_of_cafeteria_name;
 9. get_cafeteria_id_by_name (campus_id, cafeteria_name)      return cafeteria_id;
 10. list_dish_name (campus_id, cafeteria_id)      return list_of_dish_name;
-11. *get_dish_id_by_name (campus_id, cafeteria_id, server_time_period, dish_name)      return dish_id;
+11. get_dish_id_by_name (campus_id, cafeteria_id, server_time_period, dish_name)      return dish_id;
 
 12. get_comment_by_campus (campus_id)
 13. get_comment_by_cafeteria (campus_id, cafeteria_id)
