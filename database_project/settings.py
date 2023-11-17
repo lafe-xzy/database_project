@@ -77,14 +77,14 @@ WSGI_APPLICATION = 'database_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'OpenGauss',
-        # 'USER': 'lafe',
-        # 'PASSWARD': 'lafe@123',
-        # 'HOST': '192.168.232.134',
-        # 'PORT': '7654',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'project',
+        'USER': 'lafe',
+        'PASSWORD': 'lafe@123',
+        'HOST': '192.168.232.134',
+        'PORT': '7654',
     }
 }
 
