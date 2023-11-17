@@ -3,23 +3,17 @@
 
 ### 用户
 #### 1. sign_up
-- url: 
-- method: 
-- 传入参数
-- 返回值
+- url: /register
+- method: POST
+- 传入参数: username, password
+- 返回值: 0-success, 1-用户名已存在
 
 #### 2. log_in
-- url: 
-- method: 
-- 传入参数
-    - username
-    - passward
-- 返回值
-    - status
-- 状态说明
-    - 0：用户不存在
-    - 1：密码错误
-    - 2：正常登录
+- url: /login
+- method: POST
+- 传入参数: username, passward
+- 返回值: 0-success, 1-用户名不存在或密码错误
+
 
 #### 3. log_out
 - url: 
