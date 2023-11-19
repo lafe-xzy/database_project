@@ -7,4 +7,5 @@ urlpatterns = [
     path('register', views.register, name='register'),  # 注册
     path('login', views.login, name='login'),           # 登录
     path('index', views.index, name='index'),           # 主页
+    path('logout', views.logout, name='logout'),        # 登出
 ]

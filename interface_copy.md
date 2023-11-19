@@ -16,10 +16,10 @@
 
 
 #### 3. log_out
-- url: 
-- method: 
-- 传入参数
-- 返回值
+- url: /logout
+- method: 不需要
+- 传入参数: 不需要
+- 返回值：无
 
 #### 4. change_name
 - url: ?好像不需要
@@ -40,31 +40,38 @@
 - 返回值
 
 ### 数据库信息
-#### 7. get_campus_id_by_name
+#### 7. get_comment_by_dish
+- url: ？
+- method: GET
+- 传入参数: dish_name
+- 返回值: score, content
+- 状态：0-请求类型错误，1-菜品不存在，2-无评论
+
+#### 8. get_campus_id_by_name
 - url: 
 - method: 
 - 传入参数
 - 返回值
 
-#### 8. list_cafeteria_name
+#### 9. list_cafeteria_name
 - url: 
 - method: 
 - 传入参数
 - 返回值
 
-#### 9. get_cafeteria_id_by_name
+#### 10. get_cafeteria_id_by_name
 - url: 
 - method: 
 - 传入参数
 - 返回值
 
-#### 10. list_dish_name
+#### 11. list_dish_name
 - url: 
 - method: 
 - 传入参数
 - 返回值
 
-#### 11. get_dish_id_by_name
+#### 12. get_dish_id_by_name
 - url: 
 - method: 
 - 传入参数
@@ -88,11 +95,7 @@
 - 传入参数
 - 返回值
 
-#### 15. get_comment_by_dish
-- url: 
-- method: 
-- 传入参数
-- 返回值
+
 
 #### 16. get_comment_by_userID
 - url: 
