@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dish Comments</title>
+</head>
+<body>
+    <h1>Enter Dish ID:</h1>
+    <form action="index" method="GET">
+        <input type="text" name="dish_id">
+        <input type="submit" value="Get Comments">
+    </form>
+
+    <div id="comments">
+        {% if return_code == '0' %}
+            <p>No dish ID provided.</p>
+        {% elif return_code == '1' %}
+            <p>Invalid dish ID provided.</p>
+        {% elif return_code == '2' %}
+            <p>No comments available for this dish.</p>
+        {% elif return_code == '3' %}
+            <h1>Comments for Dish</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rating</th>
+                        <th>Review</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comment in comment_data %}
+                        <tr>
+                            <td>{{ comment.score }}</td>
+                            <td>{{ comment.content }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2">No comments available</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Unknown error occurred.</p>
+        {% endif %}
+    </div>
+    <a href="{% url 'logout' %}">logout</a>
+</body>
+</html>
+
+
+
