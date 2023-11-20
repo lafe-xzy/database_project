@@ -1,8 +1,18 @@
 # 接口文档
 <img src="./interface.png" style="zoom:50%" />
 
+### 已完成
+<p><input type="checkbox" checked>register</p>  
+<p><input type="checkbox" checked>login</p>
+<p><input type="checkbox" checked>logout</p>
+<p><input type="checkbox" checked>get_comment_by_dish</p>
+<p><input type="checkbox" check>list_cafeteria_name</p>
+<p><input type="checkbox" check>get_comment_by_campus</p>
+<p><input type="checkbox" check>add_comment</p>
+
+
 ### 用户
-#### 1. sign_up
+#### 1. register
 - url: /register
 - method: POST
 - 传入参数: username, password
