@@ -10,7 +10,7 @@
 <p><input type="checkbox" check>get_comment_by_campus</p>
 <p><input type="checkbox" check>add_comment</p>
 
-
+- [ ] add_commnet
 ### 用户
 #### 1. register
 - url: /register
