@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from .models import *
 
 '''用户注册'''
-def register(request):
+def sign_up(request):
     return_code = '0'
     if request.method == 'POST':
         username = request.POST.get('username') # 要求用户名唯一
@@ -20,7 +20,7 @@ def register(request):
             user.save()
             if user:    # 注册成功后跳转至登录
                 auth.login(request, user)
-                return redirect('login')    
+                return redirect('log_in')    
         except IntegrityError:
             return_code = '1'          # 用户名已存在
             return render(request, 'register.html', {'return_code':return_code})
@@ -28,7 +28,7 @@ def register(request):
     return render(request, 'register.html', {'return_code':return_code})
 
 '''用户登录'''
-def login(request):   
+def log_in(request):   
     return_code = '0'
     if request.method == 'POST':        
         username = request.POST.get('username')        
@@ -43,8 +43,8 @@ def login(request):
                 raise auth.models.PermissionDenied
         except auth.models.PermissionDenied:
             return_code = '1'
-            return render(request, 'login.html', {'return_code':return_code})
-    return render(request, "login.html", {'return_code':return_code})
+            return render(request, 'log_in.html', {'return_code':return_code})
+    return render(request, "log_in.html", {'return_code':return_code})
 
 '''主页'''
 def index(request):    
@@ -53,9 +53,9 @@ def index(request):
     return get_comment_by_dish_name(request)
 
 '''登出'''
-def logout(request):    
+def log_out(request):    
     auth.logout(request)    
-    return redirect('login')
+    return redirect('index')
 
 '''查看评论'''
 def get_comment_by_dish_name(request):

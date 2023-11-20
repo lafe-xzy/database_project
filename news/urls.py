@@ -4,9 +4,9 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),                # 默认登录页面
-    path('register', views.register, name='register'),  # 注册
-    path('login', views.login, name='login'),           # 登录
+    path('sign_up', views.sign_up, name='sign_up'),  # 注册
+    path('log_in', views.log_in, name='log_in'),           # 登录
     path('index', views.index, name='index'),           # 主页
-    path('logout', views.logout, name='logout'),        # 登出
+    path('log_out', views.log_out, name='log_out'),        # 登出
     
 ]

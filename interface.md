@@ -2,31 +2,33 @@
 <img src="./interface.png" style="zoom:50%" />
 
 ### 已完成
-<p><input type="checkbox" checked>register</p>  
-<p><input type="checkbox" checked>login</p>
-<p><input type="checkbox" checked>logout</p>
-<p><input type="checkbox" checked>get_comment_by_dish</p>
-<p><input type="checkbox" check>list_cafeteria_name</p>
-<p><input type="checkbox" check>get_comment_by_campus</p>
-<p><input type="checkbox" check>add_comment</p>
+
+- [x] sign_up
+- [x] log_in
+- [x] log_out
+- [x] get_comment_by_dish 
+- [ ] add_commnet
+- [ ] get_comment_by_campus
+- [ ] list_cafeteria_name
+
 
 
 ### 用户
 #### 1. register
-- url: /register
+- url: /sign_up
 - method: POST
 - 传入参数: username, password
 - 返回值: 0-success, 1-用户名已存在
 
 #### 2. log_in
-- url: /login
+- url: /log_in
 - method: POST
 - 传入参数: username, passward
 - 返回值: 0-success, 1-用户名不存在或密码错误
 
 
 #### 3. log_out
-- url: /logout
+- url: /log_out
 - method: 不需要
 - 传入参数: 不需要
 - 返回值：无
