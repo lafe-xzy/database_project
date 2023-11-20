@@ -2,15 +2,15 @@
 <img src="./interface.png" style="zoom:50%" />
 
 ### 已完成
-<p><input type="checkbox" checked>register</p>  
-<p><input type="checkbox" checked>login</p>
-<p><input type="checkbox" checked>logout</p>
-<p><input type="checkbox" checked>get_comment_by_dish</p>
-<p><input type="checkbox" check>list_cafeteria_name</p>
-<p><input type="checkbox" check>get_comment_by_campus</p>
-<p><input type="checkbox" check>add_comment</p>
 
+- [x] register
+- [x] login
+- [x] logout
+- [x] get_comment_by_dish 
 - [ ] add_commnet
+- [ ] get_comment_by_campus
+- [ ] list_cafeteria_name
+
 ### 用户
 #### 1. register
 - url: /register
