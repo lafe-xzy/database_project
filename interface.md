@@ -2,6 +2,7 @@
 <img src="./interface.png" style="zoom:50%" />
 
 ### 已完成
+<<<<<<< HEAD:interface.md
 
 - [x] sign_up
 - [x] log_in
@@ -11,7 +12,16 @@
 - [ ] get_comment_by_campus
 - [ ] list_cafeteria_name
 
+=======
+>>>>>>> 331ba8ac80175e7b69c538ddeda731f7696a7b6f:interface_copy.md
 
+- [x] register
+- [x] login
+- [x] logout
+- [x] get_comment_by_dish 
+- [ ] add_commnet
+- [ ] get_comment_by_campus
+- [ ] list_cafeteria_name
 
 ### 用户
 #### 1. register
