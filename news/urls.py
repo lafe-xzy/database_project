@@ -8,5 +8,5 @@ urlpatterns = [
     path('login', views.login, name='login'),           # 登录
     path('index', views.index, name='index'),           # 主页
     path('logout', views.logout, name='logout'),        # 登出
-    
+    path('comments', views.get_comment_by_dish_name, name='comments'),
 ]
