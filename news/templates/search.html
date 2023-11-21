@@ -63,6 +63,7 @@
                     <strong>{{ result.dish_name }}</strong><br>
                     {{ result.dish_price }}
                 </li>
+                <a href="{% url 'detail' dish_id=result.dish_id %}" class="btn btn-primary">查看详情</a>
             {% endfor %}
         </ul>
     {% else %}

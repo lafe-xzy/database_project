@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.contrib import auth
 from django.db import IntegrityError
@@ -81,21 +81,13 @@ def log_out(request):
 def get_some_dish(request):
     all_dish = Comments.objects.select_related('dish_id').all()
     return render(request, 'index.html', {'comment_data': all_dish})
-
-# def search(request):
-#     query = request.GET.get('query')
-#     results = []
-#     if query:
-#         results = Dish.objects.filter(dish_name__icontains=query)
-    
-#     return render(request, 'search.html', {'results': results})
     
 '''搜索界面'''
 def search(request):
     campus_list = Campus.objects.all()
     cafeteria_list = Cafeteria.objects.all()
     served_time_list = ServedTime.objects.all()
-    
+    search_result = None
     if request.method == 'GET':
         query = request.GET.get('q', '')
         campus = request.GET.get('campus', '')
@@ -126,6 +118,10 @@ def search(request):
     }
     
     return render(request, 'search.html', {'search_result': search_result, 'context': context})
+
+def detail(request, dish_id):
+    detail = get_object_or_404(Dish, pk=dish_id)
+    return render(request, 'detail.html', {'detail': detail})
 
     
             
