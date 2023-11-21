@@ -1,21 +1,5 @@
 {% load static %}
 
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>中大食评-主页</title>
-  </head>
-
-  <body>
-    <h1>中大食评-主页</h1>
-    <hr>
-    <a href="school">开始筛选评论</a>  <br/>
-    <a href="log_in">账号管理</a>
-  </body>
-  
-</html> -->
-
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -25,9 +9,15 @@
   <script src="{% static 'bootstrap/js/jquery-3.4.1.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
   <style>
+    /* 修改导航栏颜色 */
+    .navbar {
+      background-color: #8cc6dd; /* 修改为您想要的颜色值 */
+    }
+    
+    /* 修改循环图片大小 */
     .carousel-inner img {
-      width: auto;
-      height: auto;
+      max-width: 80%;
+      max-height: auto;
       display: block;
       margin: 0 auto;
     }
@@ -44,13 +34,12 @@
     <ul class="nav navbar-nav navbar-right">
         <li id="accountButton" style="display:none;"><a href="account.html">查看账户信息</a></li>
         <li id="loginButton"><a href="log_in">登录 / 注册</a></li>
+        <li id="infoButton"><a href="about_us">关于我们</a></li>
     </ul>
   </div>
 </nav>
 
-<div class="text-center">
-    <a href="comments.html" class="btn btn-primary">查看评论</a>
-</div>
+
 
 <!-- Image Carousel -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -86,6 +75,38 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
+
+<!-- 评论板块 -->
+<div class="comments-section">
+  <h2>评论</h2>
+  <div class="comments">
+    
+    <table>
+      <thead>
+          <tr>
+              <th>菜品</th>
+              <th>评分</th>
+              <th>评价</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for comment in comment_data %}
+              <tr>
+                <td>{{ comment.dish_id.dish_name }}</td>
+                <td>{{ comment.score }}</td>
+                <td>{{ comment.content }}</td>
+              </tr>
+          {% empty %}
+              <tr>
+                  <td colspan="2">暂无评论</td>
+              </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
 <!-- JavaScript to control login state -->
 <script>

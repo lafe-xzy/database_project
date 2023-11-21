@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索页面</title>
+    <!-- 引入 Bootstrap 样式表 -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>搜索产品</h1>
+    <form method="GET" action="search">
+        <div class="form-row align-items-end">
+            <div class="form-group col-md-6">
+                <label for="query">搜索关键词：</label>
+                <input type="text" class="form-control" id="query" name="q">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="campus">校园：</label>
+                <select class="form-control" id="campus" name="campus">
+                    <option value="">所有校园</option>
+                    {% for campus in context.campuses %}
+                        <option value="{{ campus.campus_id }}">{{ campus.campus_name }}</option>
+                    {% endfor %}
+                    
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="cafeteria">餐厅：</label>
+                <select class="form-control" id="cafeteria" name="cafeteria">
+                    <option value="">所有餐厅</option>
+                    {% for cafeteria in context.cafeterias %}
+                        <option value="{{ cafeteria.cafeteria_id }}">{{ cafeteria.cafeteria_name }}</option>
+                    {% endfor %}
+                    
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="served_time">供应时间：</label>
+                <select class="form-control" id="served_time" name="served_time">
+                    <option value="">所有供应时间</option>
+                    {% for served_time in context.served_times %}
+                        <option value="{{ served_time.served_time_id }}">{{ served_time.served_time_period }}</option>
+                    {% endfor %}
+                    
+                </select>
+            </div>
+            <div class="form-group col-md-12 mt-3">
+                <button type="submit" class="btn btn-primary">搜索</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="search_result">
+    {% if search_result %}
+        <ul>
+            {% for result in search_result %}
+                <li>
+                    <strong>{{ result.dish_name }}</strong><br>
+                    {{ result.dish_price }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>暂无搜索结果</p>
+    {% endif %}
+</div>
+
+<!-- 引入 Bootstrap JavaScript -->
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
+
