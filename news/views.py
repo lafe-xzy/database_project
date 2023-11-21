@@ -20,7 +20,7 @@ def sign_up(request):
             user.save()
             if user:    # 注册成功后跳转至登录
                 auth.login(request, user)
-                return redirect('log_in', {'return_code':'1'})    
+                return render(request, 'log_in.html', {'return_code':return_code})
         except IntegrityError:
             return_code = '2'          # 用户名已存在
             return render(request, 'sign_up.html', {'return_code':return_code})
@@ -38,7 +38,8 @@ def log_in(request):
             user = auth.authenticate(username=username, password=password)   
             if user:            
                 auth.login(request, user)   # 登录    
-                return redirect('index', {'return_code':'1'})    # 登录成功后跳转至主页
+                all_dish = Comments.objects.select_related('dish_id').all()
+                return render(request, 'index.html', {'comment_data': all_dish,'return_code':'1'})
             else:
                 raise auth.PermissionDenied
         except auth.PermissionDenied:
@@ -80,7 +81,7 @@ def log_out(request):
 '''主页评论展示'''
 def get_some_dish(request):
     all_dish = Comments.objects.select_related('dish_id').all()
-    return render(request, 'index.html', {'comment_data': all_dish})
+    return render(request, 'index.html', {'comment_data': all_dish, 'return_code': '3'})
     
 '''搜索界面'''
 def search(request):
