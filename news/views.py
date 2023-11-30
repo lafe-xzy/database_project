@@ -92,7 +92,7 @@ def search(request):
     served_time_list = ServedTime.objects.all()
     search_result = None
     if request.method == 'GET':
-        query = request.GET.getlist('q', '')
+        query = request.GET.get('q', '')
         campus = request.GET.getlist('campus', [])
         cafeteria = request.GET.getlist('cafeteria', [])
         served_time = request.GET.getlist('served_time', [])
@@ -104,10 +104,10 @@ def search(request):
         # if campus:
             # filters['campus_id'] = campus
             # cafeteria_list = Cafeteria.objects.filter(campus_id=campus)
-        if cafeteria:
+        if len(cafeteria) > 0:
             filters['cafeteria_id__in'] = cafeteria
             # served_time_list = ServedTime.objects.filter(cafeteria_id=cafeteria)
-        if served_time:
+        if len(served_time) > 0:
             filters['served_time_id__in'] = served_time
 
         # 执行查询

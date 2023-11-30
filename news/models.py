@@ -10,7 +10,7 @@ from django.db import models
 '''
 class Campus(models.Model):
     campus_id = models.CharField(max_length=10, primary_key=True)
-    campus_name = models.CharField(max_length=20)
+    campus_name = models.CharField(max_length=100)
     location = models.CharField(max_length=20)
     
 class Cafeteria(models.Model):
@@ -21,7 +21,7 @@ class Cafeteria(models.Model):
 class ServedTime(models.Model):
     served_time_id = models.CharField(max_length=10, primary_key=True)
     served_time_period = models.CharField(max_length=100)
-    cafeteria_id = models.ForeignKey(Cafeteria, on_delete=models.CASCADE)
+    # cafeteria_id = models.ForeignKey(Cafeteria, on_delete=models.CASCADE)
     
 class Dish(models.Model):
     dish_id = models.CharField(max_length=10, primary_key=True)
