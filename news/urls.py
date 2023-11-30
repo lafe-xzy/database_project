@@ -10,4 +10,5 @@ urlpatterns = [
     path('log_out', views.log_out, name='log_out'),         # 登出
     path('search', views.search, name='search'),            # 搜索
     path('detail/<str:dish_id>', views.detail, name='detail'), # 详情
+    path('about_us',views.about_us,name='about_us'),        # 关于我们
 ]

@@ -10,7 +10,7 @@ from .models import *
 
 '''用户注册'''
 def sign_up(request):
-    return_code = '0'
+    return_code = 0
     if request.method == 'POST':
         username = request.POST.get('username') # 要求用户名唯一
         passward = request.POST.get('password')
@@ -19,17 +19,18 @@ def sign_up(request):
             user = User.objects.create_user(username=username, password=passward)
             user.save()
             if user:    # 注册成功后跳转至登录
-                auth.login(request, user)
-                return render(request, 'log_in.html', {'return_code':return_code})
+                # auth.login(request, user)
+                return_code = 1
+                return redirect('log_in')
         except IntegrityError:
-            return_code = '2'          # 用户名已存在
+            return_code = 2          # 用户名已存在
             return render(request, 'sign_up.html', {'return_code':return_code})
             
     return render(request, 'sign_up.html', {'return_code':return_code})
 
 '''用户登录'''
 def log_in(request):   
-    return_code = '0'
+    return_code = 0
     if request.method == 'POST':        
         username = request.POST.get('username')        
         password = request.POST.get('password')        
@@ -39,11 +40,12 @@ def log_in(request):
             if user:            
                 auth.login(request, user)   # 登录    
                 all_dish = Comments.objects.select_related('dish_id').all()
-                return render(request, 'index.html', {'comment_data': all_dish,'return_code':'1'})
+                return_code = 1
+                return render(request, 'index.html', {'comment_data': all_dish,'return_code':return_code})
             else:
                 raise auth.PermissionDenied
         except auth.PermissionDenied:
-            return_code = '2'
+            return_code = 2
             return render(request, 'log_in.html', {'return_code':return_code})
     return render(request, "log_in.html", {'return_code':return_code})
 
@@ -81,7 +83,7 @@ def log_out(request):
 '''主页评论展示'''
 def get_some_dish(request):
     all_dish = Comments.objects.select_related('dish_id').all()
-    return render(request, 'index.html', {'comment_data': all_dish, 'return_code': '3'})
+    return render(request, 'index.html', {'comment_data': all_dish, 'return_code': 3})
     
 '''搜索界面'''
 def search(request):
@@ -90,10 +92,10 @@ def search(request):
     served_time_list = ServedTime.objects.all()
     search_result = None
     if request.method == 'GET':
-        query = request.GET.get('q', '')
-        campus = request.GET.get('campus', '')
-        cafeteria = request.GET.get('cafeteria', '')
-        served_time = request.GET.get('served_time', '')
+        query = request.GET.getlist('q', '')
+        campus = request.GET.getlist('campus', [])
+        cafeteria = request.GET.getlist('cafeteria', [])
+        served_time = request.GET.getlist('served_time', [])
 
         # 构建查询条件
         filters = {}
@@ -103,19 +105,19 @@ def search(request):
             # filters['campus_id'] = campus
             # cafeteria_list = Cafeteria.objects.filter(campus_id=campus)
         if cafeteria:
-            filters['cafeteria_id'] = cafeteria
+            filters['cafeteria_id__in'] = cafeteria
             # served_time_list = ServedTime.objects.filter(cafeteria_id=cafeteria)
         if served_time:
-            filters['served_time_id'] = served_time
+            filters['served_time_id__in'] = served_time
 
         # 执行查询
         search_result = Dish.objects.filter(**filters)
+        print(search_result)
         
     context = {
         'campuses': campus_list,
         'cafeterias': cafeteria_list,
         'served_times': served_time_list,
-        # 其他上下文数据
     }
     
     return render(request, 'search.html', {'search_result': search_result, 'context': context})
@@ -125,5 +127,7 @@ def detail(request, dish_id):
     return render(request, 'detail.html', {'detail': detail})
 
     
-            
+def about_us(request):
+    return render(request, 'about_us.html')
+                       
         

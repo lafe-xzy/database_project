@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
   <meta charset="UTF-8">
   <title>中大食评-账号注册</title>
@@ -19,61 +19,60 @@
     }
   </style>
 </head>
-<body>
 
-<div class="container registration-container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-6">
-              <h3 class="text-center mb-4">中大食评-账号注册</h3>
-              <form onsubmit="return validateForm()">
-                <div class="form-group">
-                  <label for="username">用户名</label>
-                  <input type="text" class="form-control" id="username" name="username" placeholder="输入用户名" required>
-                </div>
-                <div class="form-group">
-                  <label for="password">密码</label>
-                  <input type="password" class="form-control" id="password" name="password" placeholder="输入密码" required>
-                </div>
-                <div class="form-group">
-                  <label for="confirm-password">确认密码</label>
-                  <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="确认密码" required>
-                  <small id="passwordMatchError" class="text-danger" style="display: none;">密码不匹配，请重新输入。</small>
-                </div>
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-block">注册</button>
-                </div>
-              </form>
-              <a href="log_in">已有账号？返回登录</a>
+<body>
+  
+  <div class="container registration-container">
+    <div class="row justify-content-center">
+      <div class="col-md-3">
+        <h2>中大食评-账号注册</h2>
+        {% if return_code == 2 %}
+            <div class="alert">
+              用户名已存在，注册失败！
             </div>
-            <div class="col-md-6">
-              <img src="{% static 'images/0/cafe5.png' %}" class="img-fluid" alt="右侧图片">
-            </div>
+          {% endif %}
+        <form method="post" onsubmit="return validateForm()">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="username">用户名</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="输入用户名" required>
           </div>
-        </div>
+          <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="输入密码" required>
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">确认密码</label>
+            <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="确认密码" required>
+            <small id="passwordMatchError" class="text-danger" style="display: none;">密码不匹配，请重新输入。</small>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">注册</button>
+          </div>
+        </form>
+        <a href="log_in">已有账号？返回登录</a>
+      </div>
+      <div class="col-md-9">
+        <img src="{% static 'images/Cafeteria/5.png' %}" width="1030" height="750" alt="Image">
       </div>
     </div>
   </div>
-</div>
 
-<script>
-  function validateForm() {
-    var password = document.getElementById("password").value;
-    var confirmPassword = document.getElementById("confirm-password").value;
-    var passwordMatchError = document.getElementById("passwordMatchError");
+  <script>
+    function validateForm() {
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirm-password").value;
+      var passwordMatchError = document.getElementById("passwordMatchError");
 
-    if (password !== confirmPassword) {
-      passwordMatchError.style.display = "block";
-      return false; // 不予注册
-    } else {
-      passwordMatchError.style.display = "none";
-      return true; // 可以注册
+      if (password !== confirmPassword) {
+        passwordMatchError.style.display = "block";
+        return false; // 不予注册
+      } else {
+        passwordMatchError.style.display = "none";
+        return true; // 可以注册
+      }
     }
-  }
-</script>
+  </script>
 
 </body>
 </html>
