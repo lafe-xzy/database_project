@@ -4,7 +4,7 @@
 <html lang="zh">
     <head>
         <meta charset="UTF-8">
-        <title>{{ detail.dish_name }} 详细信息</title>
+        <title>{{ dish_info.dish_name }} 详细信息</title>
         <!-- 引入Bootstrap -->
         <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
         <script src="{% static 'bootstrap/js/jquery-3.4.1.min.js' %}"></script>
@@ -12,12 +12,38 @@
     </head>
 
     <body>
+        </div>
+        <h1>{{ dish_info.dish_name }} </h1>
+        <p>{{ dish_info.dish_price }}</p>
+        <p>{{ dish_info.dish_cafe }}</p>
+        <p>{{ dish_info.dish_served_time }}</p>
+        {% for comment in dish_comments %}
+            <tr>
+                <td>{{ comment.username_id }}</td>
+                <td>{{ comment.score }}</td>
+                <td>{{ comment.content }}</td>
+            </tr>
+            <br>
+        {% empty %}
+            <tr>
+                <td colspan="2">暂无评论</td>
+            </tr>
+        {% endfor %}
         <div class="container mt-5">
+            <!-- 添加评论的表单 -->
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="score">评分：</label>
+                    <input type="number" class="form-control" id="score" name="score" min="1" max="5">
+                </div>
+                <div class="form-group">
+                    <label for="content">评论内容：</label>
+                    <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">提交评论</button>
+            </form>
             <div class="col-md-4 column">
-                
-            </div>
-            <h1>{{ detail.dish_name }} </h1>
-            <p>{{ detail.dish_price }}</p>
         </div>
     </body>
 </html>
