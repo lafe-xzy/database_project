@@ -1,10 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib import auth
 from django.db import IntegrityError
 from django.contrib.auth.models import User
-from django.contrib import messages
-from django.http import HttpResponse
 
 from .models import *
 
@@ -60,25 +58,6 @@ def log_out(request):
     auth.logout(request)    
     return redirect('index')
 
-'''查看评论'''
-# def get_comment_by_dish_name(request):
-#     return_code = '0'
-#     if request.method == 'GET':
-#         dish_name = request.GET.get('dish_name')
-#         if dish_name is None:
-#             return_code = '1'
-#             return render(request, 'index.html', {'return_code': return_code})
-        
-#         comment = Dish.objects.filter(dish_name=dish_name)
-#         if comment is None:
-#             return_code = '2'
-#             return render(request, 'index.html', {'return_code': return_code})
-        
-#         comment_data = list(comment.values())
-#         return_code = '3'   # 菜品存在且有评论
-#         return render(request, 'index.html', {'return_code': return_code, 'comment_data': comment_data})
-    
-#     return render(request, 'index.html', {'return_code': return_code})
 
 '''主页评论展示'''
 def get_some_dish(request):
@@ -122,12 +101,53 @@ def search(request):
     
     return render(request, 'search.html', {'search_result': search_result, 'context': context})
 
-def detail(request, dish_id):
-    detail = get_object_or_404(Dish, pk=dish_id)
-    return render(request, 'detail.html', {'detail': detail})
+'''菜品详情页-获取评论'''
+def get_comments_by_dish_id(dish_id):
+    comments = Comments.objects.filter(dish_id=dish_id)
+    return comments
 
+'''菜品详情页'''
+def detail(request, dish_id):
+    return_code = 0
+    
+    dish = Dish.objects.get(dish_id=dish_id)  
+    dish_name = dish.dish_name
+    dish_price = dish.dish_price
+    dish_cafe = dish.cafeteria_id.cafeteria_name
+    dish_served_time = dish.served_time_id.served_time_period
+    dish_info = {'dish_name': dish_name, 'dish_price': dish_price, 'dish_cafe': dish_cafe, 'dish_served_time': dish_served_time}
+    
+    dish_comments = get_comments_by_dish_id(dish_id)
+    
+    if request.method == 'POST':
+        return_code = add_comment(request, dish_id)
+        
+    return render(request, 'detail.html', 
+                  {'dish_info': dish_info, 'dish_comments': dish_comments, 'return_code': return_code})
+
+'''添加评论'''
+def add_comment(request, dish_id):
+    # 判断用户是否登录
+    user = request.user
+    if not user.is_authenticated:
+        return 2
+    username = user.username
+    print(username)
+    
+    score = request.POST.get('score')
+    content = request.POST.get('content')
+    dish = Dish.objects.get(dish_id=dish_id)
+    
+    # 获取当前最大的评论id
+    max_id = Comments.objects.all().aggregate(models.Max('comments_id'))['comments_id__max']
+    next_id = int(max_id) + 1
+    comment = Comments.objects.create(comments_id=next_id, score=score, content=content, dish_id=dish, username_id=username)
+    comment.save()
+    return 1
     
 def about_us(request):
     return render(request, 'about_us.html')
+
+
                        
         
