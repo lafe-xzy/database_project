@@ -25,8 +25,7 @@
                     </br></br></br>
 
                     <form method="GET" action="search">
-                        <table>
-                            <tr>
+                        <table> <tr>
                                 <td>
                                     <label>校园：</label><br>
                                     {% for campus in context.campuses %}
@@ -60,8 +59,7 @@
                                         <p>暂无时间信息可供选择。</p>
                                     {% endfor %}
                                 </td>
-                            </tr>
-                        </table>
+                        </tr> </table>
                         <button type="submit" class="btn btn-primary">筛选 & 组合</button>
                     </form>
                     
