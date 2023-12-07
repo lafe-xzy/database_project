@@ -62,6 +62,8 @@ def log_out(request):
 '''主页评论展示'''
 def get_some_dish(request):
     all_dish = Comments.objects.select_related('dish_id').all()
+    # 随机取8条评论
+    all_dish = all_dish.order_by('?')[:8]
     return render(request, 'index.html', {'comment_data': all_dish, 'return_code': 3})
     
 '''搜索界面'''
