@@ -52,6 +52,7 @@ class Migration(migrations.Migration):
                 ('score', models.IntegerField()),
                 ('content', models.CharField(max_length=200)),
                 ('dish_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='news.dish')),
+                ('username', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='auth.User')),
             ],
         ),
         migrations.AddField(
