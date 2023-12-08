@@ -1,66 +1,75 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>User Account</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    /* 自定义样式 */
-    /* 如果需要自定义样式，请在这里添加 */
-  </style>
-</head>
-<body>
+<html lang="zh">
+  <head>
+      <meta charset="UTF-8">
+      <title>About Us</title>
+      <!-- 引入Bootstrap -->
+      <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+      <script src="{% static 'bootstrap/js/jquery-3.4.1.min.js' %}"></script>
+      <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+      <style>
+        .navbar {
+          background-color: #8cc6dd;
+        }
+        footer{
+          background-color: #8cc6dd;
+          padding: 20px 0;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          text-align: center;
+        }
+      </style>
+  </head>
+  
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">中大食评-关于我们</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li id="infoButton"><a href="../">返回首页</a></li>
+        </ul>
+      </div>
+    </nav>
 
-  <!-- 导航栏 -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Your Website</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+    <div class="container">
+      <div class="col-md-4">
+          <div class="text-center">
+              <img src="{% static 'about_us/xzy.jpg' %}" alt="Person 1" class="img-fluid rounded-circle mb-3" style="max-width: 170px;">
+              <h4>姓名：许志勇</h4>
+              <p>学号：</p>
+              <p>简介：</p>
+          </div>
+      </div>
 
-  <!-- 用户账户信息 -->
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-6">
-        <h2>User Account</h2>
-        <form>
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter username">
+      <div class="col-md-4">
+          <div class="text-center">
+              <img src="{% static 'about_us/xjw.jpg' %}" alt="Person 2" class="img-fluid rounded-circle mb-3" style="max-width: 130px;">
+              <h4>姓名：许嘉瑋</h4>
+              <p>学号：21307275</p>
+              <p>简介：</p>
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter password">
+      </div>
+
+      <div class="col-md-4">
+          <div class="text-center">
+              <img src="{% static 'about_us/kjx.jpg' %}" alt="Person 3" class="img-fluid rounded-circle mb-3" style="max-width: 130px;">
+              <h4>姓名：邝佳轩</h4>
+              <p>学号：</p>
+              <p>简介：</p>
           </div>
-          <button type="submit" class="btn btn-primary">Save Changes</button>
-        </form>
       </div>
     </div>
-  </div>
 
-  <!-- 页脚 -->
-  <footer class="footer mt-5 bg-light">
-    <div class="container text-center">
-      <span class="text-muted">Your Website Footer</span>
-    </div>
-  </footer>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+    <footer>
+      <div class="container">
+          <h4>中山大学 2023 秋季 数据库期末大作业</h4>
+      </div>
+    </footer>
+    
+  </body>
 </html>
