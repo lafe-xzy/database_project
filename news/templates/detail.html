@@ -14,9 +14,25 @@
     <body>
         </div>
         <h1>{{ dish_info.dish_name }} </h1>
-        <p>{{ dish_info.dish_price }}</p>
-        <p>{{ dish_info.dish_cafe }}</p>
-        <p>{{ dish_info.dish_served_time }}</p>
+        
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>价格</th>
+                    <td>{{ dish_info.dish_price }}</td>
+                </tr>
+                <tr>
+                    <th>供餐餐厅</th>
+                    <td>{{ dish_info.dish_cafe }}</td>
+                </tr>
+                <tr>
+                    <th>供餐时间</th>
+                    <td>{{ dish_info.dish_served_time }}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+
         {% for comment in dish_comments %}
             <tr>
                 <td>{{ comment.username_id }}</td>
