@@ -43,12 +43,10 @@
                     <form method="GET" action="search" id="filterForm" style="display: flex;">
                         <input type="text" class="form-control" id="query" name="q" placeholder="输入搜索关键词" style="margin-right: 5px;">
                         <button type="submit" class="btn btn-primary">搜索</button>
-                    </form>
 
-                    <a href="../">返回首页</a>
-                    <br><br><br>
+                        <a href="../">返回首页</a>
+                        <br><br><br>
 
-                    <form method="GET" action="search" id="checkboxForm">
                         <label>餐厅：</label><br>
                         <div class="cafeteria-checkboxes">
                             {% for cafeteria in context.cafeterias %}
