@@ -29,23 +29,44 @@
 
 ### 实体属性设计分析
 数据库中，实体集以及它们的所属属性如下所示，注意主码使用下划线标明：
-+ Campus (校区) : 包含属性 (<ins>campus_id</ins>, location, campus_name)
++ Campus (校区)
+  + 包含属性 (<ins>campus_id</ins>, location, campus_name)
   + 其中主码 campus_id 是标识校区项唯一性的属性，location 标识该校区所在的位置，campus_name 标识该校区的具体校区名字
-+ Cafeteria (餐厅) : 包含属性 (<ins>cafeteria_id</ins>, cafeteria_name, campus_id)
++ Cafeteria (餐厅)
+  + 包含属性 (<ins>cafeteria_id</ins>, cafeteria_name, campus_id)
   + 其中主码 cafeteria_id 是标识餐厅项唯一性的属性，cafeteria_name 标识该餐厅的具体名字，campus_id 是辅助餐厅归属校区的外键属性
-+ Dish (菜品) : 包含属性 (<ins>dish_id</ins>, dish_name, dish_price, cafeteria_id, served_time_id)
++ Dish (菜品)
+  + 包含属性 (<ins>dish_id</ins>, dish_name, dish_price, cafeteria_id, served_time_id)
   + 其中主码 dish_id 是标识菜品唯一性的属性，dish_price 标识该菜品的价钱，cafeteria_id 是辅助查找菜品归属餐厅的外键属性，served_time_id 是辅助查找菜品具体供应时间的外键
-+ ServedTime (供应时间) : 包含属性 (<ins>served_time_id</ins>, served_time_period)
++ ServedTime (供应时间)
+  + 包含属性 (<ins>served_time_id</ins>, served_time_period)
   + 其中主码 serverd_time_id 是标识供应时间唯一性的属性，serverd_time_period 标识该供应时间的具体时段
-+ Comments (评价) : 包含属性 (<ins>comment_id</ins>, dish_id, user_id, score, content)
++ Comments (评价)
+  + 包含属性 (<ins>comment_id</ins>, dish_id, user_id, score, content)
   + 其中主码 comment_id 是标识评价唯一性的属性，dish_id 是辅助找到被评价菜品的外键属性，user_id 是辅助查找所评论用户的外键属性，score 是该评价的所打的分数，具体范围在 0 - 5 之间，content 是该评价的具体内容，且可以是空值
-+ User (用户) : 包含属性 (<ins>user_id</ins>, password, is_superuser, username)
++ User (用户)
+  + 包含属性 (<ins>user_id</ins>, password, is_superuser, username)
   + 其中主码 user_id 是标识用户唯一性的属性，password 标识用户登录系统所使用的密码，is_superuser 标识该用户是特权用户还是普通用户，username 标识该用户的昵称 
 
-
+设计一个数据库模型的两个主要缺陷通常是**冗余**和**不完整**，因此为了避免**不完整**缺陷的产生，我们在数据库设计中多次使用了例如餐厅属性 campus_id、菜品属性 cafeteria_id、评论属性 user_id 等单值外键来辅助关联实体之间的联系，而为了避免**冗余**缺陷对于数据库存储和效能的不良影响，我们继续建立实体-联系模型来解决这一问题。
 
 ### 实体-联系图设计分析
-![ER](https://github.com/lafe-xzy/database_project/assets/104507258/00d10a4f-914a-4806-a965-e2e37a41940f)
+在对每对实体建立可能的联系实例之前，我们需要从实体集中删除冗余属性，删除分析过程如下:
+1. 在餐厅与校区之间建立联系实例时，由于餐厅内有外键属性 campus_id，而校区主键为 campus_id，因此餐厅的 campus_id 冗余属性被删除
+2. 在菜品与餐厅之间建立联系实例时，由于菜品内有外键属性 cafeteria_id，餐厅主键为 cafeteria_id，因此菜品的 cafeteria_id 冗余属性被删除
+3. 在菜品与供应时间之间建立联系实例时，由于菜品内有外键属性 served_time_id，供应时间主键为 served_time_id，因此供应时间的 served_time_id 冗余属性被删除
+4. 在评价与菜品之间建立联系实例时，由于评价内有外键属性 dish_id，而菜品主键为 dish_id，因此评价的 dish_id 冗余属性被删除
+5. 在评价与用户之间建立联系实例时，由于评价内有外键属性 user_id，而用户主键为 user_id，因此评价的 user_id 冗余属性被删除
+
+在完成了对实体集中的冗余属性对的删除之后，我们按照先前理论设计的实体集建立实体-联系表：
+![ER](https://github.com/lafe-xzy/database_project/assets/104507258/48c72ac4-b628-4d2d-8891-eb48fb1109d3)
+
+其中我们具体设计的联系集如下：
++ Belong：关联餐厅和校区的第一条删除过程，且餐厅与校区的映射基数属于一对多
++ Cook：关联菜品和餐厅的第二条删除过程，且菜品与餐厅的映射基数属于一对多
++ Serve：关联菜品和供应时间的第三条删除过程，且菜品和供应时间的映射基数属于一对多
++ Refer：关联评价和菜品的第四条删除过程，且评价和菜品的映射基数属于一对多
++ Make：关联评价和用户的第五条删除过程，且评价和用户的映射基数属于一对多
 
 举一个例子说明
 
