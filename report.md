@@ -22,8 +22,25 @@
 4. **菜品评价**：用户应该能够添加自己对某个菜品的评价，包括评分信息和评价内容，方便其它用户根据菜品评分选择菜品。
 5. **数据管理**：食堂管理人员应该能够对菜品信息进行增删、管理菜品信息。
 
+
 ## 数据库设计
-【TODO: kjx】介绍每一个表（简要介绍与创建语言），E-R 图。要详细。
+
+出于我们小组在概念设计阶段对该大作业——中大校园食堂的菜品评价系统**中大食评**的功能需求的考虑，包括在实现中期时经过协商讨论决定增加的数据库实体，我们小组的数据库最终呈现中包含了六个实体，分别命名为 Campus (校区)、Cafeteria (餐厅)、Dish (菜品)、ServedTime (供应时间)、Comments (评价) 和 User (用户)。接下来的数据库设计主要拆分成对具体实体的属性设计分析，和实体-联系模型的设计分析两个部分进行讲解。
+
+### 实体属性设计分析
+数据库中，实体集以及它们的所属属性如下所示，注意主码使用下划线标明：
++ Campus (校区) : 包含属性 (<ins>campus_id</ins>, location, campus_name)
++ Cafeteria (餐厅) : 包含属性 (<ins>cafeteria_id</ins>, cafeteria_name, campus_id)
++ Dish (菜品) : 包含属性 (<ins>dish_id</ins>, dish_name, dish_price, cafeteria_id, served_time_id)
++ ServedTime (供应时间) : 包含属性 (<ins>served_time_id</ins>, served_time_period)
++ Comments (评价) : 包含属性 (<ins>comment_id</ins>, dish_id, user_id, score, content)
++ User (用户) : 包含属性 (<ins>user_id</ins>, password, is_superuser, username)
+
+### 实体-联系图设计分析
+![ER](https://github.com/lafe-xzy/database_project/assets/104507258/00d10a4f-914a-4806-a965-e2e37a41940f)
+
+2
+
 
 ## 功能实现
 ### 开发平台和框架
