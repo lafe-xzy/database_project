@@ -9,24 +9,6 @@
         <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
         <script src="{% static 'bootstrap/js/jquery-3.4.1.min.js' %}"></script>
         <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-        <style>
-            .cafeteria-checkboxes {
-                display: grid;
-                grid-gap: 10px; /* 调整复选框之间的间距 */
-            }
-
-            .cafeteria-checkboxes label {
-                display: block;
-            }
-
-            @media (min-width: 768px) {
-                .cafeteria-checkboxes label {
-                    width: calc(33.33% - 10px); /* 计算每行三个复选框的宽度 */
-                    float: left;
-                    margin-bottom: 10px;
-                }
-            }
-        </style>
         <script>
             // 当页面加载时，检查并设置复选框的状态
             window.onload = function () {
