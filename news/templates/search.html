@@ -12,12 +12,19 @@
         <style>
             .cafeteria-checkboxes {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 调整每行显示的复选框数量和宽度 */
                 grid-gap: 10px; /* 调整复选框之间的间距 */
             }
 
             .cafeteria-checkboxes label {
                 display: block;
+            }
+
+            @media (min-width: 768px) {
+                .cafeteria-checkboxes label {
+                    width: calc(33.33% - 10px); /* 计算每行三个复选框的宽度 */
+                    float: left;
+                    margin-bottom: 10px;
+                }
             }
         </style>
         <script>
