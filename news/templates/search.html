@@ -20,6 +20,30 @@
                 display: block;
             }
         </style>
+        <script>
+            // 当页面加载时，检查并设置复选框的状态
+            window.onload = function () {
+                var form = document.getElementById('checkboxForm');
+                var checkboxes = form.querySelectorAll('input[type="checkbox"]');
+
+                // 检查本地存储中是否存在复选框的状态
+                for (var i = 0; i < checkboxes.length; i++) {
+                    var checkbox = checkboxes[i];
+                    var checkboxId = checkbox.id;
+
+                    // 如果本地存储中存在状态，则设置复选框为选中状态
+                    if (localStorage.getItem(checkboxId) === 'true') {
+                        checkbox.checked = true;
+                    }
+
+                    // 监听复选框状态变化，并将其存储到本地存储中
+                    checkbox.addEventListener('change', function (event) {
+                        var targetCheckbox = event.target;
+                        localStorage.setItem(targetCheckbox.id, targetCheckbox.checked);
+                    });
+                }
+            };
+        </script>
     </head>
 
     <body>
@@ -94,35 +118,5 @@
             </div>
         </div>
 
-        <script>
-            // 在提交表单前保存已选中的复选框值到 URL 参数
-            document.getElementById('filterForm').addEventListener('submit', function(event) {
-                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                const checkedValues = [];
-                checkboxes.forEach(function(checkbox) {
-                    if (checkbox.checked) {
-                        checkedValues.push(checkbox.value);
-                    }
-                });
-                const queryString = new URLSearchParams(window.location.search);
-                checkedValues.forEach(function(value) {
-                    queryString.append('selected', value);
-                });
-                window.location = window.location.pathname + '?' + queryString.toString();
-                event.preventDefault();
-            });
-
-            // 在新页面加载时根据 URL 参数勾选复选框
-            window.addEventListener('DOMContentLoaded', function() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const selectedValues = urlParams.getAll('selected');
-                selectedValues.forEach(function(value) {
-                    const checkbox = document.getElementById(value);
-                    if (checkbox) {
-                        checkbox.checked = true;
-                    }
-                });
-            });
-        </script>
     </body>
 </html>
