@@ -10,10 +10,11 @@
         <script src="{% static 'bootstrap/js/jquery-3.4.1.min.js' %}"></script>
         <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
         <script>
-            // 当页面加载时，检查并设置复选框的状态
+            // 当页面加载时，检查并设置复选框的状态以及输入框的内容
             window.onload = function () {
                 var form = document.getElementById('filterForm');
                 var checkboxes = form.querySelectorAll('input[type="checkbox"]');
+                var queryInput = document.getElementById('query');
 
                 // 检查本地存储中是否存在复选框的状态
                 for (var i = 0; i < checkboxes.length; i++) {
@@ -31,6 +32,17 @@
                         localStorage.setItem(targetCheckbox.id, targetCheckbox.checked);
                     });
                 }
+
+                // 检查本地存储中是否存在输入框的值
+                var savedQuery = localStorage.getItem('savedQuery');
+                if (savedQuery) {
+                    queryInput.value = savedQuery;
+                }
+
+                // 监听输入框内容变化，并将其存储到本地存储中
+                queryInput.addEventListener('input', function () {
+                    localStorage.setItem('savedQuery', queryInput.value);
+                });
             };
         </script>
     </head>
