@@ -25,22 +25,29 @@
 
 ## 数据库设计
 
-出于我们小组在概念设计阶段对该大作业——中大校园食堂的菜品评价系统**中大食评**的功能需求的考虑，包括在实现中期时经过协商讨论决定增加的数据库实体，我们小组的数据库最终呈现中包含了六个实体，分别命名为 Campus (校区)、Cafeteria (餐厅)、Dish (菜品)、ServedTime (供应时间)、Comments (评价) 和 User (用户)。接下来的数据库设计主要拆分成对具体实体的属性设计分析，和实体-联系模型的设计分析两个部分进行讲解。
+&emsp;&emsp;出于我们小组在概念设计阶段对该大作业——中大校园食堂的菜品评价系统**中大食评**的功能需求的考虑，包括在实现中期时经过协商讨论决定增加的数据库实体，我们小组的数据库最终呈现中包含了六个实体，分别命名为 Campus (校区)、Cafeteria (餐厅)、Dish (菜品)、ServedTime (供应时间)、Comments (评价) 和 User (用户)。接下来的数据库设计主要拆分成对具体实体的属性设计分析，和实体-联系模型的设计分析两个部分进行讲解。
 
 ### 实体属性设计分析
 数据库中，实体集以及它们的所属属性如下所示，注意主码使用下划线标明：
 + Campus (校区) : 包含属性 (<ins>campus_id</ins>, location, campus_name)
+  + 其中主码 campus_id 是标识校区项唯一性的属性，location 标识该校区所在的位置，campus_name 标识该校区的具体校区名字
 + Cafeteria (餐厅) : 包含属性 (<ins>cafeteria_id</ins>, cafeteria_name, campus_id)
+  + 其中主码 cafeteria_id 是标识餐厅项唯一性的属性，cafeteria_name 标识该餐厅的具体名字，campus_id 是辅助餐厅归属校区的外键属性
 + Dish (菜品) : 包含属性 (<ins>dish_id</ins>, dish_name, dish_price, cafeteria_id, served_time_id)
+  + 其中主码 dish_id 是标识菜品唯一性的属性，dish_price 标识该菜品的价钱，cafeteria_id 是辅助查找菜品归属餐厅的外键属性，served_time_id 是辅助查找菜品具体供应时间的外键
 + ServedTime (供应时间) : 包含属性 (<ins>served_time_id</ins>, served_time_period)
+  + 其中主码 serverd_time_id 是标识供应时间唯一性的属性，serverd_time_period 标识该供应时间的具体时段
 + Comments (评价) : 包含属性 (<ins>comment_id</ins>, dish_id, user_id, score, content)
+  + 其中主码 comment_id 是标识评价唯一性的属性，dish_id 是辅助找到被评价菜品的外键属性，user_id 是辅助查找所评论用户的外键属性，score 是该评价的所打的分数，具体范围在 0 - 5 之间，content 是该评价的具体内容，且可以是空值
 + User (用户) : 包含属性 (<ins>user_id</ins>, password, is_superuser, username)
+  + 其中主码 user_id 是标识用户唯一性的属性，password 标识用户登录系统所使用的密码，is_superuser 标识该用户是特权用户还是普通用户，username 标识该用户的昵称 
+
+
 
 ### 实体-联系图设计分析
 ![ER](https://github.com/lafe-xzy/database_project/assets/104507258/00d10a4f-914a-4806-a965-e2e37a41940f)
 
-2
-
+举一个例子说明
 
 ## 功能实现
 ### 开发平台和框架
