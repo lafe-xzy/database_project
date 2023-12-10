@@ -1,5 +1,4 @@
 {% load static %}
-{% with dish_id_int=dish_info.dish_id|default:"0"|add:"0" %}
 
 <!DOCTYPE html>
 <html lang="zh">
@@ -32,7 +31,7 @@
                 </tr>
                 <tr>
                     <th>图片</th>
-                    <td><img src="%{ static 'images/Dish/{{ dish_id_int }}.png }%" alt="{{ dish_info.dish_name }} "></td>
+                    <td><img src="{{ dish_info.dish_id }}" alt="{{ dish_info.dish_name }}"> </td>
                 </tr>
             </tbody>
         </table>
