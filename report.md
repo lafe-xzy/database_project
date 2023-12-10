@@ -59,7 +59,7 @@
 5. 在评价与用户之间建立联系实例时，由于评价内有外键属性 user_id，而用户主键为 user_id，因此评价的 user_id 冗余属性被删除
 
 在完成了对实体集中的冗余属性对的删除之后，我们按照先前理论设计的实体集来建立实体-联系表：
-![ER](https://github.com/lafe-xzy/database_project/assets/104507258/48c72ac4-b628-4d2d-8891-eb48fb1109d3)
+![ER](pic/ER.png)
 
 其中我们具体设计的联系集如下：
 + Belong：关联餐厅和校区的第一条删除过程，且餐厅与校区的映射基数属于一对多
@@ -172,11 +172,66 @@ except auth.PermissionDenied:       # 用户名不存在或密码错误
 ```
 
 ## 功能展示
+本部分仅展示图片并简单介绍，具体功能可见视频。
 ### 主界面——评论展示
+<table rules="none" align="center">
+	<tr>
+    <td>
+			<center>
+				<img src="pic/index.png" style="zoom:50%" />
+				<br/>
+				<font color="AAAAAA">主界面滚动展示食堂图片，并随机展示评论</font>
+			</center>
+		</td>
+	</tr>
+</table>
 
 ### 登录注册界面
+<table rules="none" align="center">
+	<tr>
+    <td>
+			<center>
+				<img src="pic/log_in.png" style="zoom:50%" />
+				<br/>
+				<font color="AAAAAA">登陆界面</font>
+			</center>
+		</td>
+    <td>
+			<center>
+				<img src="pic/sign_up.png" style="zoom:50%" />
+				<br/>
+				<font color="AAAAAA">注册界面</font>
+			</center>
+		</td>
+	</tr>
+</table>
 
 ### 搜索界面
+<!-- <table rules="none" align="center">
+	<tr>
+    <td>
+			<center>
+				<img src="pic/search.png" style="zoom:50%" />
+				<br/>
+				<font color="AAAAAA">搜索界面</font>
+			</center>
+		</td>
+	</tr>
+</table> -->
+
+左侧上方可以对菜名进行模糊搜索，左侧下方可以对餐厅和用餐时段进行组合搜索，下方演示对春晖园食堂菜品“茄子”相关菜品的搜索结果。
+
+<!-- <table rules="none" align="center">
+	<tr>
+    <td>
+			<center>
+				<img src="pic/search.png" style="zoom:50%" />
+				<br/>
+				<font color="AAAAAA">搜索界面</font>
+			</center>
+		</td>
+	</tr>
+</table> -->
 
 ### 菜品详情页
 
