@@ -9,6 +9,42 @@
         <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
         <script src="{% static 'bootstrap/js/jquery-3.4.1.min.js' %}"></script>
         <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <script>
+            // 当页面加载时，检查并设置复选框的状态以及输入框的内容
+            window.onload = function () {
+                var form = document.getElementById('filterForm');
+                var checkboxes = form.querySelectorAll('input[type="checkbox"]');
+                var queryInput = document.getElementById('query');
+
+                // 检查本地存储中是否存在复选框的状态
+                for (var i = 0; i < checkboxes.length; i++) {
+                    var checkbox = checkboxes[i];
+                    var checkboxId = checkbox.id;
+
+                    // 如果本地存储中存在状态，则设置复选框为选中状态
+                    if (localStorage.getItem(checkboxId) === 'true') {
+                        checkbox.checked = true;
+                    }
+
+                    // 监听复选框状态变化，并将其存储到本地存储中
+                    checkbox.addEventListener('change', function (event) {
+                        var targetCheckbox = event.target;
+                        localStorage.setItem(targetCheckbox.id, targetCheckbox.checked);
+                    });
+                }
+
+                // 检查本地存储中是否存在输入框的值
+                var savedQuery = localStorage.getItem('savedQuery');
+                if (savedQuery) {
+                    queryInput.value = savedQuery;
+                }
+
+                // 监听输入框内容变化，并将其存储到本地存储中
+                queryInput.addEventListener('input', function () {
+                    localStorage.setItem('savedQuery', queryInput.value);
+                });
+            };
+        </script>
     </head>
 
     <body>
@@ -16,53 +52,38 @@
             <div class="row clearfix">
                 <div class="col-md-4 column">
                     <h1>中大食评-搜索</h1>
-                    <form method="GET" action="search" style="display: flex;">
+                    <form method="GET" action="search" id="filterForm">
                         <input type="text" class="form-control" id="query" name="q" placeholder="输入搜索关键词" style="margin-right: 5px;">
                         <button type="submit" class="btn btn-primary">搜索</button>
-                    </form>
+                        
+                        <br><br>
+                        <a href="../">返回首页</a>
+                        <br><br><br>
 
-                    <a href="../">返回首页</a>
-                    </br></br></br>
+                        <label>餐厅：</label><br>
+                        <div class="cafeteria-checkboxes">
+                            {% for cafeteria in context.cafeterias %}
+                                <label>
+                                    <input type="checkbox" id="{{ cafeteria.cafeteria_id }}" name="cafeteria" value="{{ cafeteria.cafeteria_id }}">
+                                    {{ cafeteria.cafeteria_name }}
+                                </label>
+                            {% empty %}
+                                <p>暂无饭堂信息可供选择。</p>
+                            {% endfor %}
+                        </div>
 
-                    <form method="GET" action="search">
-                        <table> <tr>
-                                <td>
-                                    <label>校园：</label><br>
-                                    {% for campus in context.campuses %}
-                                        <label for="{{ campus.campus_id }}">
-                                            <input type="checkbox" id="{{ campus.campus_id }}" name="campus" value="{{ campus.campus_id }}" >
-                                            {{ campus.campus_name }}
-                                        </label><br>
-                                    {% empty %}
-                                        <p>暂无校园信息可供选择。</p>
-                                    {% endfor %}
-                                </td>
-                                <td>
-                                    <label>餐厅：</label><br>
-                                    {% for cafeteria in context.cafeterias %}
-                                        <label for="{{ cafeteria.cafeteria_id }}">
-                                            <input type="checkbox" id="{{ cafeteria.cafeteria_id }}" name="cafeteria" value="{{ cafeteria.cafeteria_id }}">
-                                            {{ cafeteria.cafeteria_name }}
-                                        </label><br>
-                                    {% empty %}
-                                        <p>暂无饭堂信息可供选择。</p>
-                                    {% endfor %}
-                                </td>
-                                <td>
-                                    <label>供应时间：</label><br>
-                                    {% for time in context.served_times %}
-                                        <label for="{{ time.served_time_id }}">
-                                            <input type="checkbox" id="{{ time.served_time_id }}" name="time" value="{{ time.served_time_id }}">
-                                            {{ time.served_time_period }}
-                                        </label><br>
-                                    {% empty %}
-                                        <p>暂无时间信息可供选择。</p>
-                                    {% endfor %}
-                                </td>
-                        </tr> </table>
+                        <label>供应时间：</label><br>
+                        {% for time in context.served_times %}
+                            <label>
+                                <input type="checkbox" id="{{ time.served_time_id }}" name="time" value="{{ time.served_time_id }}">
+                                {{ time.served_time_period }}
+                            </label><br>
+                        {% empty %}
+                            <p>暂无时间信息可供选择。</p>
+                        {% endfor %}
+
                         <button type="submit" class="btn btn-primary">筛选 & 组合</button>
                     </form>
-                    
                 </div>
 
                 <div class="col-md-1 column"></div>
@@ -96,5 +117,6 @@
                 </div>
             </div>
         </div>
+
     </body>
 </html>
