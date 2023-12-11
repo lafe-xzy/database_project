@@ -12,60 +12,62 @@
     </head>
 
     <body>
-        </div>
         <h1>{{ dish_info.dish_name }} </h1>
         
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>价格</th>
-                    <td>{{ dish_info.dish_price }}</td>
-                </tr>
-                <tr>
-                    <th>供餐餐厅</th>
-                    <td>{{ dish_info.dish_cafe }}</td>
-                </tr>
-                <tr>
-                    <th>供餐时间</th>
-                    <td>{{ dish_info.dish_served_time }}</td>
-                </tr>
-                <tr>
-                    <th>图片</th>
-                    <td><img src="{{ dish_info.dish_id }}" alt="{{ dish_info.dish_name }}"> </td>
-                </tr>
-            </tbody>
-        </table>
-        
-
-        {% for comment in dish_comments %}
-            <tr>
-                <td>{{ comment.username_id }}</td>
-                <td>{{ comment.score }}</td>
-                <td>{{ comment.content }}</td>
-            </tr>
-            <br>
-        {% empty %}
-            <tr>
-                <td colspan="2">暂无评论</td>
-            </tr>
-        {% endfor %}
-        
-        <div class="container mt-5">
-            <!-- 添加评论的表单 -->
-            <form method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="score">评分：</label>
-                    <input type="number" class="form-control" id="score" name="score" min="1" max="5">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="container mt-5">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>价格</th>
+                                <td>{{ dish_info.dish_price }}</td>
+                            </tr>
+                            <tr>
+                                <th>供餐餐厅</th>
+                                <td>{{ dish_info.dish_cafe }}</td>
+                            </tr>
+                            <tr>
+                                <th>供餐时间</th>
+                                <td>{{ dish_info.dish_served_time }}</td>
+                            </tr>
+                            <tr>
+                                <th>图片</th>
+                                <td><img src="{{ dish_info.dish_id }}" alt="{{ dish_info.dish_name }}"> </td>
+                            </tr>
+                            <tr>
+                                <th>评论</th>
+                                {% for comment in dish_comments %}
+                                    <td>{{ comment.username_id }}</td>
+                                    <td>{{ comment.score }}</td>
+                                    <td>{{ comment.content }}</td>
+                                    <br>
+                                {% empty %}
+                                    <td colspan="2">暂无评论</td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="form-group">
-                    <label for="content">评论内容：</label>
-                    <textarea class="form-control" id="content" name="content" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">提交评论</button>
-            </form>
 
-            <div class="col-md-4 column"></div>
+                <div class="container mt-5">
+                    <!-- 添加评论的表单 -->
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="score">评分：</label>
+                            <input type="number" class="form-control" id="score" name="score" min="1" max="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="content">评论内容：</label>
+                            <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">提交评论</button>
+                    </form>
+                </div>
+                
+            </div>
         </div>
+        
     </body>
 </html>
