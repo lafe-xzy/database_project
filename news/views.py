@@ -55,6 +55,7 @@ def log_in(request):
             if user:            
                 auth.login(request, user)   # 正确则登录    
                 all_dish = Comments.objects.select_related('dish_id').all()
+                all_dish = all_dish.order_by('?')[:8]
                 return_code = 1
                 return render(request, 'index.html', {'comment_data': all_dish,'return_code':return_code})
             else:
@@ -195,6 +196,12 @@ def add_comment(request, dish_id):
 def about_us(request):
     return render(request, 'about_us.html')
 
+def get_comments_by_username(username):
+    '''用户评论'''
+    comments = Comments.objects.filter(username_id=username)
+    return comments
+    
+
 def user_info(request):
     '''
     用户信息
@@ -203,10 +210,13 @@ def user_info(request):
     - 返回值: 
     '''
     username = request.user.username
+    comments = get_comments_by_dish_id(username)
+    user_info = {'username': username, 'comments': comments}
+    
     if request.method == 'POST':
         # 修改密码
         log_out(request)
-    return render(request, 'user_info.html', {'username': username})
+    return render(request, 'user_info.html', {'user_info': user_info})
 
 
                        
