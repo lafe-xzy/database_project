@@ -215,7 +215,8 @@ def user_info(request):
     if request.method == 'POST':
         # 修改密码
         log_out(request)
-    return render(request, 'user_info.html', {'user_info': user_info})
+    else:
+        return render(request, 'user_info.html', {'user_info': user_info})
 
 
                        
