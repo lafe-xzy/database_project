@@ -16,8 +16,8 @@
         
         <div class="container">
             <div class="row clearfix">
-                <div class="container mt-5">
-                    <table class="table">
+                <div class="container mt-6">
+                    <table class="dish">
                         <tbody>
                             <tr>
                                 <th>价格</th>
@@ -35,39 +35,53 @@
                                 <th>图片</th>
                                 <td><img src="{{ dish_info.dish_id }}" alt="{{ dish_info.dish_name }}"> </td>
                             </tr>
-                            <tr>
-                                <th>评论</th>
-                                {% for comment in dish_comments %}
-                                    <td>{{ comment.username_id }}</td>
-                                    <td>{{ comment.score }}</td>
-                                    <td>{{ comment.content }}</td>
-                                    <br>
-                                {% empty %}
-                                    <td colspan="2">暂无评论</td>
-                                {% endfor %}
-                            </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="container mt-5">
-                    <!-- 添加评论的表单 -->
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="score">评分：</label>
-                            <input type="number" class="form-control" id="score" name="score" min="1" max="5">
-                        </div>
-                        <div class="form-group">
-                            <label for="content">评论内容：</label>
-                            <textarea class="form-control" id="content" name="content" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">提交评论</button>
-                    </form>
+                <div class="container mt-6">
+                    <table class="comment">
+                        <thead>
+                            <tr>
+                                <th>用户ID</th>
+                                <th>评分</th>
+                                <th>评价</th>
+                            </tr>
+                        </thead>
+        
+                        <tbody>
+                            {% for comment in comment_data %}
+                                <tr>
+                                  <td>{{ comment.username_id }}</td>
+                                  <td>{{ comment.score }}</td>
+                                  <td>{{ comment.content }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="2">暂无评论</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
                 
             </div>
         </div>
-        
+
+        <div class="container">
+            <!-- 添加评论的表单 -->
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="score">评分：</label>
+                    <input type="number" class="form-control" id="score" name="score" min="1" max="5">
+                </div>
+                <div class="form-group">
+                    <label for="content">评论内容：</label>
+                    <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">提交评论</button>
+            </form>
+        </div>
     </body>
 </html>
