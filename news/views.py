@@ -207,10 +207,9 @@ def user_info(request):
     用户信息
     - url: /user_info
     - method: GET and POST
-    - 返回值: 
     '''
     username = request.user.username
-    comments = get_comments_by_dish_id(username)
+    comments = get_comments_by_username(username)
     user_info = {'username': username, 'comments': comments}
     
     if request.method == 'POST':
