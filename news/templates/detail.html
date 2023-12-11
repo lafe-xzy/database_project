@@ -16,8 +16,9 @@
         
         <div class="container">
             <div class="row clearfix">
-                <div class="container mt-6">
-                    <table class="dish">
+                <div class="col-md-6 column">
+                    
+                    <table class="table">
                         <tbody>
                             <tr>
                                 <th>价格</th>
@@ -33,14 +34,14 @@
                             </tr>
                             <tr>
                                 <th>图片</th>
-                                <td><img src="{{ dish_info.dish_id }}" alt="{{ dish_info.dish_name }}"> </td>
+                                <td><img src="{{ dish_info.dish_id }}" alt="{{ dish_info.dish_name }}" style="max-width: 200px;"> </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="container mt-6">
-                    <table class="comment">
+                <div class="col-md-6 column">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>用户ID</th>
@@ -50,7 +51,7 @@
                         </thead>
         
                         <tbody>
-                            {% for comment in comment_data %}
+                            {% for comment in dish_comments %}
                                 <tr>
                                   <td>{{ comment.username_id }}</td>
                                   <td>{{ comment.score }}</td>
@@ -80,6 +81,15 @@
                     <label for="content">评论内容：</label>
                     <textarea class="form-control" id="content" name="content" rows="3"></textarea>
                 </div>
+
+                {% if return_code == 1 %}
+                    <div class="alert-success">评论成功</div>
+                {% endif %}
+                {% if return_code == 2 %}
+                    <div class="alert-danger">评论失败！请登录后再评论...</div>
+                    <a href="log_in">前往登录</a>
+                {% endif %}
+
                 <button type="submit" class="btn btn-primary">提交评论</button>
             </form>
         </div>
