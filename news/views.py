@@ -148,6 +148,6 @@ def add_comment(request, dish_id):
 def about_us(request):
     return render(request, 'about_us.html')
 
-
+def user(request):
+    return render(request, 'user.html')
                        
-        
