@@ -147,14 +147,13 @@ def detail(request, dish_id):
     - 返回值: dish_info, dish_comments, return_code(0-GET方法, 1-评论成功，2-未登录，评论失败)
     '''
     return_code = 0
-    
     # 获取菜品信息
     dish = Dish.objects.get(dish_id=dish_id)  
     dish_name = dish.dish_name
     dish_price = dish.dish_price
     dish_cafe = dish.cafeteria_id.cafeteria_name
     dish_served_time = dish.served_time_id.served_time_period
-    dish_info = {'dish_name': dish_name, 'dish_price': dish_price, 'dish_cafe': dish_cafe, 'dish_served_time': dish_served_time}
+    dish_info = {'dish_id': '/static/images/Dish/'+str(int(float(dish_id)))+'.png','dish_name': dish_name, 'dish_price': dish_price, 'dish_cafe': dish_cafe, 'dish_served_time': dish_served_time}
     
     # 获取菜品评论
     dish_comments = get_comments_by_dish_id(dish_id)
@@ -187,7 +186,7 @@ def add_comment(request, dish_id):
     
     # 获取当前最大的评论id（因为数据库的 comments_id 是 unique 的，且存储为 varchar）
     max_id = Comments.objects.all().aggregate(models.Max('comments_id'))['comments_id__max']
-    next_id = int(max_id) + 1
+    next_id = int(float(max_id)) + 1
     # 创建评论
     comment = Comments.objects.create(comments_id=next_id, score=score, content=content, dish_id=dish, username_id=username)
     comment.save()
@@ -195,6 +194,19 @@ def add_comment(request, dish_id):
     
 def about_us(request):
     return render(request, 'about_us.html')
+
+def user_info(request):
+    '''
+    用户信息
+    - url: /user_info
+    - method: GET and POST
+    - 返回值: 
+    '''
+    username = request.user.username
+    if request.method == 'POST':
+        # 修改密码
+        log_out(request)
+    return render(request, 'user_info.html', {'username': username})
 
 
                        
