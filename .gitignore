@@ -1,5 +1,4 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
+# cache
 news/__pycache__/
 news/migrations/
 database_project/__pycache__/
