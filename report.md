@@ -1,9 +1,15 @@
 # 数据库期末大作业报告
-图片
+
+| **姓名**  | **学号**   | **负责的工作** |
+|:-------:|:--------:|:---------:|
+| 许志勇（组长） | 21307169 | 后端功能实现，协助数据库设计    |
+| 许嘉瑋     | 21307275 | 前端功能实现，协助数据库设计    |
+| 邝佳轩     | 21307177 | 数据库数据搜集，数据库模式设计    |
 
 ## 应用介绍
 
-&emsp;&emsp;我们小组基于 OpenGauss 实现了中大校园食堂的菜品评价系统——**中大食评**。经过前期小组讨论和调研，我们的数据库包括 6 个实体，并基于 Django 的框架实现 Web 的交互界面，旨在提供涵盖五个校园的食堂菜品信息查看、菜品评价等功能。
+&emsp;&emsp;我们小组基于 OpenGauss 实现了中大校园食堂的菜品评价系统——**中大食评**。经过前期小组讨论和调研，我们的数据库包括 6 个实体，并基于 Django 的框架实现 Web 的交互界面，旨在提供涵盖五个校园的食堂菜品信息查看、菜品评价等功能。项目地址：https://github.com/lafe-xzy/database_project/tree/main 
+
 
 ## 需求分析
   
@@ -75,14 +81,26 @@
 - 后端：Django
 
 ### 前端网页设计
-【TODO: xjw】网页跳转逻辑图，每个网页的简要介绍。
-1.**index**：网站首页，轮播3张中大饭堂图片、随机显示8条已有评论，可从导航栏进入登录界面（登录前）、账户管理界面（登录后）、网站开发团队简介界面；还可前往搜索、查看更多菜品及其评论。
-2.**log_in**：登录界面，可返回主界面、前往账户注册界面。
-3.**sign_up**：注册界面，可返回登录界面。
-4.**search**：菜品筛选、展示界面，可点击前往查看每个菜品的详细信息及其评论，或在侧边进行筛选、查找，也可返回主界面。
-5.**detail**：菜品详细信息界面，登录后可发表评论，否则只能查看评论。
-6.**user_info**：账户信息界面，可查看账户已发表过的评论。
-7.**about_us**：网站开发团队简介界面，展示了团队成员简要信息及相关工作。
+<table rules="none" align="center">
+	<tr>
+    <td>
+			<center>
+				<img src="pic/webpages.png" style="zoom:50%" />
+				<br/>
+				<font color="AAAAAA">页面跳转逻辑</font>
+			</center>
+		</td>
+	</tr>
+</table>
+
+1. **index**：网站首页，轮播3张中大饭堂图片、随机显示8条已有评论，可从导航栏进入登录界面（登录前）、账户管理界面（登录后）、网站开发团队简介界面；还可前往搜索、查看更多菜品及其评论。
+2. **log_in**：登录界面，可返回主界面、前往账户注册界面。
+3. **sign_up**：注册界面，可返回登录界面。
+4. **search**：菜品筛选、展示界面，可点击前往查看每个菜品的详细信息及其评论，或在侧边进行筛选、查找，也可返回主界面。
+5. **detail**：菜品详细信息界面，登录后可发表评论，否则只能查看评论。
+6. **user_info**：账户信息界面，可查看账户已发表过的评论。
+7. **about_us**：网站开发团队简介界面，展示了团队成员简要信息及相关工作。  
+
 **源代码参见附件news/templates/xxx.html**
 
 ### 后端功能实现
@@ -215,7 +233,7 @@ except auth.PermissionDenied:       # 用户名不存在或密码错误
 </table>
 
 ### 搜索界面
-<!-- <table rules="none" align="center">
+<table rules="none" align="center">
 	<tr>
     <td>
 			<center>
@@ -225,30 +243,67 @@ except auth.PermissionDenied:       # 用户名不存在或密码错误
 			</center>
 		</td>
 	</tr>
-</table> -->
+</table>
 
-左侧上方可以对菜名进行模糊搜索，左侧下方可以对餐厅和用餐时段进行组合搜索，下方演示对春晖园食堂菜品“茄子”相关菜品的搜索结果。
+左侧上方可以对菜名进行模糊搜索，左侧下方可以对餐厅和用餐时段进行组合搜索，下方演示对第三食堂菜品“茄子”相关菜品的搜索结果。
 
-<!-- <table rules="none" align="center">
+<table rules="none" align="center">
 	<tr>
     <td>
 			<center>
-				<img src="pic/search.png" style="zoom:50%" />
+				<img src="pic/search_for_qiezi.png" style="zoom:50%" />
 				<br/>
-				<font color="AAAAAA">搜索界面</font>
+				<font color="AAAAAA">搜索结果</font>
 			</center>
 		</td>
 	</tr>
-</table> -->
+</table>
 
 ### 菜品详情页
+<table rules="none" align="center">
+	<tr>
+    <td>
+			<center>
+				<img src="pic/detail.png" style="zoom:50%" />
+				<br/>
+				<font color="AAAAAA">菜品详情-鸡扒饭</font>
+			</center>
+		</td>
+	</tr>
+</table>
 
 ### 管理界面
+<table rules="none" align="center">
+	<tr>
+    <td>
+			<center>
+				<img src="pic/admin.png" style="zoom:50%" />
+				<br/>
+				<font color="AAAAAA">菜品详情-鸡扒饭</font>
+			</center>
+		</td>
+	</tr>
+</table>
 
-## 分工
+### 个人信息界面与关于我们界面
+<table rules="none" align="center">
+	<tr>
+    <td>
+			<center>
+				<img src="pic/user_info.png" style="zoom:50%" />
+				<br/>
+				<font color="AAAAAA">登陆界面</font>
+			</center>
+		</td>
+    <td>
+			<center>
+				<img src="pic/about_us.png" style="zoom:50%" />
+				<br/>
+				<font color="AAAAAA">注册界面</font>
+			</center>
+		</td>
+	</tr>
+</table>
 
-| **姓名**  | **学号**   | **负责的工作** |
-|:-------:|:--------:|:---------:|
-| 许志勇（组长） | 21307169 | 后端功能实现    |
-| 许嘉瑋     | 21307275 | 前端功能实现    |
-| 邝佳轩     | 21307177 | 数据库设计     |
+
+

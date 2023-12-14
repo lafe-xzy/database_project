@@ -5,7 +5,22 @@ pip install -r requirements.txt
 
 ## 运行方法
 
-1. 虚拟机运行 opengauss 数据库
+1. 虚拟机运行 opengauss 数据库，记录 IP 和端口
+2. 修改 database_project/settings.py 中的 `HOST` 和 `PORT` 为对应 IP 和端口
+    ```python
+    DATABASES = {
+        'default': {
+            # 'ENGINE': 'django.db.backends.sqlite3',
+            # 'NAME': BASE_DIR / 'db.sqlite3',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'project',
+            'USER': 'lafe',
+            'PASSWORD': 'lafe@123',
+            'HOST': '192.168.232.147',
+            'PORT': '7654',
+        }
+    }
+    ```
 2. 运行
     ```
     python manage.py makemigrations
