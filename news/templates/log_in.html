@@ -29,7 +29,7 @@
               您已成功注册！欢迎登录……
             </div>
           {% endif %}
-          <form method="post">
+          <form method="post" action='log_in'>
             {% csrf_token %}
             <div class="form-group">
               <label for="username">用户名</label>

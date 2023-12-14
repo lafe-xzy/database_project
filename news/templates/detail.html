@@ -12,12 +12,11 @@
     </head>
 
     <body>
-        <h1>{{ dish_info.dish_name }} </h1>
+        <h1 style="margin-top: 20px; margin-left: 20px;">{{ dish_info.dish_name }} </h1>
         
         <div class="container">
             <div class="row clearfix">
                 <div class="col-md-6 column">
-                    
                     <table class="table">
                         <tbody>
                             <tr>
@@ -65,7 +64,6 @@
                         </tbody>
                     </table>
                 </div>
-                
             </div>
         </div>
 
@@ -81,8 +79,18 @@
                     <label for="content">评论内容：</label>
                     <textarea class="form-control" id="content" name="content" rows="3"></textarea>
                 </div>
+
+                {% if return_code == 1 %}
+                    <div class="alert-success">评论成功</div>
+                {% endif %}
+                {% if return_code == 2 %}
+                    <div class="alert-danger">评论失败！请登录后再评论...</div>
+                    <a href="../log_in">前往登录</a>
+                {% endif %}
+
                 <button type="submit" class="btn btn-primary">提交评论</button>
             </form>
+            <a href="../">返回</a>
         </div>
     </body>
 </html>

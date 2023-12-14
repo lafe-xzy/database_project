@@ -27,7 +27,7 @@ def sign_up(request):
             user.save()
             if user:    # 如果注册成功，跳转到登录页面
                 return_code = 1
-                return redirect('log_in')
+                return render(request, 'log_in.html', {'return_code':return_code})
         except IntegrityError:
             return_code = 2          # 用户名已存在
             return render(request, 'sign_up.html', {'return_code':return_code})
@@ -44,7 +44,7 @@ def log_in(request):
     - 返回值: 0-未操作, 1-成功，2-用户名不存在或密码错误，3-取回评论
     '''
     return_code = 0
-    if request.method == 'POST':     
+    if request.method == 'POST':    
         # 从 POST 请求中获取用户名、密码参数   
         username = request.POST.get('username')        
         password = request.POST.get('password')        
@@ -74,12 +74,6 @@ def index(request):
     # 主页评论展示
     return get_some_dish(request)
 
-def log_out(request): 
-    '''登出
-    '''   
-    auth.logout(request)    
-    return redirect('index')
-
 def get_some_dish(request):
     '''
     主页评论展示
@@ -89,6 +83,9 @@ def get_some_dish(request):
     all_dish = Comments.objects.select_related('dish_id').all()
     # 随机取8条评论
     all_dish = all_dish.order_by('?')[:8]
+    
+    if request.user.is_authenticated:
+        return render(request, 'index.html', {'comment_data': all_dish,'return_code':1})
     return render(request, 'index.html', {'comment_data': all_dish, 'return_code': 3})
     
 def search(request):
@@ -201,6 +198,13 @@ def get_comments_by_username(username):
     comments = Comments.objects.filter(username_id=username)
     return comments
     
+def log_out(request): 
+    '''登出
+    '''   
+    auth.logout(request)    
+    all_dish = Comments.objects.select_related('dish_id').all()
+    all_dish = all_dish.order_by('?')[:8]
+    return render(request, 'index.html', {'comment_data': all_dish,'return_code':3})
 
 def user_info(request):
     '''
@@ -214,9 +218,14 @@ def user_info(request):
     
     if request.method == 'POST':
         # 修改密码
-        log_out(request)
+        auth.logout(request)    
+        all_dish = Comments.objects.select_related('dish_id').all()
+        all_dish = all_dish.order_by('?')[:8]
+        return redirect('log_in')
     else:
         return render(request, 'user_info.html', {'user_info': user_info})
+
+    
 
 
                        

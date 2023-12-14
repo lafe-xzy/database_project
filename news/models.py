@@ -32,7 +32,7 @@ class Dish(models.Model):
     
 class Comments(models.Model):
     comments_id = models.CharField(max_length=10, primary_key=True)
-    username = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True)
+    username = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True, to_field='username')
     dish_id = models.ForeignKey(Dish, on_delete=models.CASCADE)
     score = models.FloatField()
     content = models.CharField(max_length=200)

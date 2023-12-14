@@ -11,4 +11,5 @@ urlpatterns = [
     path('search', views.search, name='search'),            # 搜索
     path('detail/<str:dish_id>', views.detail, name='detail'), # 详情
     path('about_us',views.about_us,name='about_us'),        # 关于我们
+    path('user_info',views.user_info,name='user_info'),               # 关于我们
 ]
