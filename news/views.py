@@ -27,13 +27,12 @@ def sign_up(request):
             user.save()
             if user:    # 如果注册成功，跳转到登录页面
                 return_code = 1
-                return redirect('log_in')
+                return return render(request, 'log_in.html', {'return_code':return_code})
         except IntegrityError:
             return_code = 2          # 用户名已存在
             return render(request, 'sign_up.html', {'return_code':return_code})
             
     return render(request, 'sign_up.html', {'return_code':return_code})
-
 
 def log_in(request):   
     '''
@@ -65,7 +64,6 @@ def log_in(request):
             return render(request, 'log_in.html', {'return_code':return_code})
     return render(request, "log_in.html", {'return_code':return_code})
 
-
 def index(request):  
     '''
     主页
@@ -78,7 +76,7 @@ def log_out(request):
     '''登出
     '''   
     auth.logout(request)    
-    return redirect('index')
+    return render(request, 'index.html', {'comment_data': all_dish,'return_code':3})
 
 def get_some_dish(request):
     '''
@@ -200,7 +198,6 @@ def get_comments_by_username(username):
     '''用户评论'''
     comments = Comments.objects.filter(username_id=username)
     return comments
-    
 
 def user_info(request):
     '''
