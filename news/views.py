@@ -53,7 +53,10 @@ def log_in(request):
             # 验证用户名、密码是否正确
             user = auth.authenticate(username=username, password=password)   
             if user:            
-                auth.login(request, user)   # 正确则登录    
+                auth.login(request, user)   # 正确则登录   
+                # 如果是超级用户，跳转到后台管理页面
+                if user.is_superuser:
+                    return redirect('/admin') 
                 all_dish = Comments.objects.select_related('dish_id').all()
                 all_dish = all_dish.order_by('?')[:8]
                 return_code = 1
