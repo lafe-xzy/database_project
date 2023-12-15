@@ -5,8 +5,22 @@ pip install -r requirements.txt
 
 ## 运行方法
 
-1. 虚拟机运行 opengauss 数据库，记录 IP 和端口
-2. 修改 database_project/settings.py 中的 `HOST` 和 `PORT` 为对应 IP 和端口
+1. 虚拟机运行 opengauss 数据库并创建连接，记录 IP 和端口
+    ```shell
+    su - opengauss
+    gsql -d postgres -r
+    ```
+2. 登录 opengauss 创建管理员，以用户名为 lafe 为例
+    ```shell
+    create user lafe with password 'lafe@123';
+    alter user lafe sysadmin;
+    \c - lafe
+    ```
+3. 创建数据库
+    ```python
+    create database project;
+    ```
+4. 修改 database_project/settings.py 中的 `HOST` 和 `PORT` 为对应 IP 和端口
     ```python
     DATABASES = {
         'default': {
@@ -21,18 +35,21 @@ pip install -r requirements.txt
         }
     }
     ```
-2. 运行
-    ```
+5. 数据库迁移
+    ```shell
     python manage.py makemigrations
     python manage.py migrate
-    python manage.py runserver 0.0.0.0:8000
     ```
-2. 同一局域网下访问：主机 IP + 端口，如 172.26.xx.xx:8000
+6. 使用 Data Studio 导入 static/data 目录下的数据
+7. 运行
+    ```shell
+    python manage.py runserver
+    ```
 
 
 
 
-## Notice!
+## 注意
 1. Django 版本不可以太高，由于 OpenGauss 内置的 Postgres 版本较低（9.2.4），较高版本的 Django 不支持。
 2. 管理员：lafe(123)
 3. 测试用户：21307169(xzy12345), 21307177(kjx12345), 21307275(xjw12345)
