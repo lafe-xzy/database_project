@@ -3,7 +3,8 @@ from django.shortcuts import redirect
 from django.contrib import auth
 from django.db import IntegrityError
 from django.contrib.auth.models import User
-
+from django.db.models.functions import Cast
+from django.db.models import Max, FloatField
 from .models import *
 
 
@@ -186,7 +187,9 @@ def add_comment(request, dish_id):
     dish = Dish.objects.get(dish_id=dish_id)
     
     # 获取当前最大的评论id（因为数据库的 comments_id 是 unique 的，且存储为 varchar）
-    max_id = Comments.objects.all().aggregate(models.Max('comments_id'))['comments_id__max']
+    max_id = Comments.objects.annotate(
+        comments_id_float=Cast('comments_id', FloatField())).aggregate(max_id_float=Max('comments_id_float'))['max_id_float']
+    print(max_id)
     next_id = int(float(max_id)) + 1
     # 创建评论
     comment = Comments.objects.create(comments_id=next_id, score=score, content=content, dish_id=dish, username_id=username)
